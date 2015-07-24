@@ -5,3 +5,4 @@ checklist
 quiz.sqlite
 public/media 
 *.log
+.env
