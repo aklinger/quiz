@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var quizController = require ('../controllers/quiz_controller');
+var authorController= require ('../controllers/author_controller');
 
 // Pagina de entrada (home page)
 router.get('/', function(req, res) {
@@ -22,8 +23,6 @@ router.put('/quizes/:quizId(\\d+)',        quizController.update);
 router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
 
 // Definicion de ruta de Autor
-router.get('/author',function(req, res) {
-  res.render('author', { title: 'Autor' });
-});
+router.get('/author', authorController.author);
 
 module.exports = router;

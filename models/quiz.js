@@ -23,6 +23,19 @@ module.exports = function(sequelize, DataTypes) {
           msg: "-> Falta Respuesta"
                   }
       }
+    },
+
+    tema: {
+      type: DataTypes.STRING,
+      validate:
+      {
+        notEmpty: {msg: "-> Falta Tema"},
+        notIn: {
+          args: [["Tema"]],
+          msg: "-> Falta Tema"
+                  }
+      }
     }
+
   });
 }
