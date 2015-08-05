@@ -41,6 +41,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Finalizar sesion por tiempo
+app.use(function(req, res, next) {
+    var time = new Date().getTime();
+    if(req.session.lastTime && time-req.session.lastTime>120000) {
+        delete req.session.user;
+    }
+    req.session.lastTime = time;
+    next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
@@ -76,12 +86,5 @@ app.use(function(err, req, res, next) {
     });
 });
 
-// expirar sesión tras dos minutos inactivos  o 120000 milisegundos
-app.use(function (req, res, next) {
-  var tiempo = 120000;
-  req.session.cookie.expires = new Date(Date.now() + tiempo);
-  req.session.cookie.maxAge = tiempo;
-  next();
-});
 
 module.exports = app;
